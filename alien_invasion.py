@@ -2,6 +2,7 @@
 import sys
 import pygame
 from time import sleep
+# 自建文件
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
@@ -9,6 +10,7 @@ from alien import Alien
 from game_stats import GameStats
 from button import Button
 from scoreboard import Scoreboard
+# 自建文件
 
 
 class AlienInvasion:
@@ -38,7 +40,7 @@ class AlienInvasion:
                 self.ship.update()
                 self._update_bullets()
                 self._update_alien()
-            self._update_screen()
+            self._update_screen()  # 每次循环时都重新绘制屏幕
 
     def _check_events(self):
         # 监视键盘和鼠标事件
@@ -49,7 +51,7 @@ class AlienInvasion:
                 self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
-            elif event.type == pygame.MOUSEBUTTONDOWN:
+            elif event.type == pygame.MOUSEBUTTONDOWN:  # 抓取鼠标点按动作
                 mouse_pos = pygame.mouse.get_pos()
                 self._check_play_button(mouse_pos)
 
