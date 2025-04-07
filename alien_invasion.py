@@ -20,16 +20,19 @@ class AlienInvasion:
         """初始化游戏并创建游戏资源"""
         self.settings = Settings()
         pygame.init()
+        # 实例化游戏窗口
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
-        self.settings.screen_width = self.screen.get_rect().width
-        self.settings.screen_height = self.screen.get_rect().height
+        # 设置窗口名称为"Alien Invasion"
         pygame.display.set_caption("Alien Invasion")
+        # 设置游戏运行最初始的状态
         self.stats = GameStats(self)
+        # 实例化计分板
         self.scoreboard_vision = Scoreboard(self)
         self.ship = Ship(self)   # ai.game=self=AlienInvasion(),此时ai.game成为一个实例对象
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
         self._create_fleet()
+        # 实例化按键区域
         self.play_button = Button(self, "play")
 
     def run_game(self):
@@ -56,10 +59,10 @@ class AlienInvasion:
                 self._check_play_button(mouse_pos)
 
     def _check_play_button(self, mouse_pos):
+        # 当鼠标点击按键区域时返回True
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
         if button_clicked and not self.stats.game_active:
             self.settings.initialize_dynamic_settings()
-            self.stats.reset_stats()
             self.stats.game_active = True
             self.scoreboard_vision.prep_score()
             self.scoreboard_vision.prep_level()
