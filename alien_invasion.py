@@ -1,4 +1,3 @@
-# 飞船
 import sys
 import pygame
 from time import sleep
@@ -10,7 +9,6 @@ from alien import Alien
 from game_stats import GameStats
 from button import Button
 from scoreboard import Scoreboard
-# 自建文件
 
 
 class AlienInvasion:
@@ -28,9 +26,12 @@ class AlienInvasion:
         self.stats = GameStats(self)
         # 实例化计分板
         self.scoreboard_vision = Scoreboard(self)
+        # 实例化飞船
         self.ship = Ship(self)   # ai.game=self=AlienInvasion(),此时ai.game成为一个实例对象
+        # 创建两个容纳sprite的容器
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
+        # 实例化外星人舰队群
         self._create_fleet()
         # 实例化按键区域
         self.play_button = Button(self, "play")
@@ -137,6 +138,19 @@ class AlienInvasion:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
 
+    def _create_fleet(self):
+        """创建外星人群"""
+        new_alien = Alien(self)
+        new_alien_width, new_alien_height = new_alien.rect.size
+        available_space_x = self.settings.screen_width - 2 * new_alien_width
+        ship_height = self.ship.rect.height
+        available_space_y = self.settings.screen_height - 3 * new_alien_height - ship_height
+        number_alien_columns = available_space_x // (2 * new_alien_width)  # //为取整除法
+        number_alien_rows = available_space_y // (2 * new_alien_height)
+        for row_number in range(number_alien_rows+1):
+            for alien_number in range(number_alien_columns+1):
+                self._create_new_alien(alien_number, row_number, new_alien_width, new_alien_height)
+
     def _create_new_alien(self, alien_number, number_rows, new_alien_width, new_alien_height):
         # 创建一个外星人
         new_alien = Alien(self)
@@ -145,19 +159,6 @@ class AlienInvasion:
         new_alien.rect.x = new_alien.x
         new_alien.rect.y = new_alien.y
         self.aliens.add(new_alien)
-
-    def _create_fleet(self):
-        """创建外星人群"""
-        new_alien = Alien(self)
-        new_alien_width, new_alien_height = new_alien.rect.size
-        available_space_x = self.settings.screen_width - 2 * new_alien_width
-        ship_height = self.ship.rect.height
-        available_space_y = self.settings.screen_height - 3 * new_alien_height - ship_height
-        number_alien_x = available_space_x // (2 * new_alien_width)  # //为取整除法
-        number_rows = available_space_y // (2 * new_alien_height)
-        for row_number in range(number_rows+1):
-            for alien_number in range(number_alien_x+1):
-                self._create_new_alien(alien_number, row_number, new_alien_width, new_alien_height)
 
     def _update_alien(self):
         self._check_fleet_edge()
