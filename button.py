@@ -20,7 +20,7 @@ class Button:
         self.font = pygame.font.SysFont(None, 48)
         # 创建文本并设置文本的内容、颜色、背景颜色
         self.msg_image = self.font.render(msg, True, self.text_color, self.button_color)
-        # 获取文本的位置
+        # 获取文本的外接矩形框
         self.msg_image_rect = self.msg_image.get_rect()
         # 设置文本的位置
         self.msg_image_rect.center = self.rect.center

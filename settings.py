@@ -24,7 +24,7 @@ class Settings:
         self.speedup_scale = 1.1
         self.score_scale = 1.5
         self.alien_points = 50
-        self.initialize_dynamic_settings()
+        # self.initialize_dynamic_settings()
 
     def initialize_dynamic_settings(self):
         self.ship_speed = 0.5

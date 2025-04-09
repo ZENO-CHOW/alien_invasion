@@ -23,7 +23,7 @@ class Scoreboard:
                                             self.text_color, self.settings.bg_color)
         self.score_rect = self.score_image.get_rect()
         self.score_rect.centerx = self.screen_rect.centerx
-        self.score_rect.top = self.score_rect.top
+        self.score_rect.top = 20
         # 初始化最高得分板并设置坐标，放置在屏幕右侧
         self.high_score_image = self.font.render(str(self.stats.high_score), True,
                                                  self.text_color, self.settings.bg_color)
@@ -39,7 +39,7 @@ class Scoreboard:
         self.level_rect.top = self.high_score_rect.bottom + 10
 
         # 准备飞船图像
-        self.prep_ships()
+        # self.prep_ships()
 
     def prep_score(self):
         # 显示当前得分
@@ -66,6 +66,7 @@ class Scoreboard:
 
     def prep_ships(self):
         # 创建对应生命值个数的飞船并储存
+        self.ships.empty()
         for ship_number in range(self.stats.ship_last):
             ship = Ship(self.ai_game)
             ship.rect.x = 10 + ship_number * ship.rect.width
