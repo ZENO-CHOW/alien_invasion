@@ -1,6 +1,8 @@
 import pygame
 from pygame.sprite import Sprite
 
+from resource_path import resource_path
+
 
 class Ship(Sprite):
     """管理飞船的类"""
@@ -11,7 +13,7 @@ class Ship(Sprite):
         self.screen_rect = self.screen.get_rect()
         self.settings = ai_game.settings
         # 加载飞船图像并获取其外接矩形。
-        self.image = pygame.image.load('images/fly_ship.bmp')
+        self.image = pygame.image.load(resource_path("images", "fly_ship.bmp"))
         self.rect = self.image.get_rect()
         # 对于每艘新飞船，都将其放在屏幕底部的中央。
         self.rect.midbottom = self.screen_rect.midbottom
