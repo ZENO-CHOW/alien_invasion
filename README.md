@@ -1,3 +1,15 @@
 # About alien_invasion
 
-引用了pygame库，项目上传的文件并未包含该库文件需自行安装该库
+这是一个基于 Pygame 的小游戏，依赖由 [uv](https://docs.astral.sh/uv/) 管理。
+
+安装项目依赖：
+
+```bash
+uv sync
+```
+
+运行游戏：
+
+```bash
+uv run python alien_invasion.py
+```
